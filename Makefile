@@ -65,3 +65,19 @@ wave_tx:
 clean_tx:
 	rm -rf $(VVP_TX)
 	rm -rf $(VCD_TX)
+
+# Target : Rx
+
+rx: compile_rx
+	$(SIMULATION) $(VVP_RX)
+
+compile_rx:
+	mkdir -p temp
+	$(COMPILER) $(COMPILER_FLAG2) $(COMPILER_FLAG1) $(VVP_RX) $(RX_TB) $(RX_SV)
+
+wave_rx:
+	$(WAVE) $(VCD_RX)
+
+clean_rx:
+	rm -rf $(VVP_RX)
+	rm -rf $(VCD_RX)
