@@ -20,7 +20,7 @@ bit counter_16_indication;
 bit counter_8_indication;
 state_t current_state, next_state;
 
-assign counter_16_indication = (counter_16 == 'd15);
+assign counter_16_indication = (counter_16 == 'd15 && tick_i);
 assign counter_8_indication = (counter_8 == 'd7);
 
 always_ff @(posedge clk_i) begin
@@ -37,7 +37,7 @@ always_ff @(posedge clk_i) begin
         end
 
         if (current_state == DATA) begin
-            counter_8 <= (counter_16_indication == 1'b1 && tick_i == 1'b1) ? ((counter_8 == 'd7) ?   'd0 : counter_8 + 'd1) : counter_8; 
+            counter_8 <= (counter_16_indication == 1'b1) ? ((counter_8 == 'd7) ?   'd0 : counter_8 + 'd1) : counter_8; 
         end
     end
 end
@@ -63,7 +63,7 @@ always_comb begin
             else next_state = START; 
         end 
         DATA : begin
-            if (counter_8_indication == 1'b1) next_state = STOP;
+            if (counter_8_indication == 1'b1 && counter_16_indication == 1'b1) next_state = STOP;
             else next_state =  DATA;
         end 
         STOP : begin

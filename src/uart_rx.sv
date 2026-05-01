@@ -37,7 +37,7 @@ always_ff @( posedge clk_i ) begin
     if (!rst_i) data <= 'd0;
     else begin
         if (current_state == DATA && middle_bit_indication == 1'b1) begin
-            data[7-counter_8] <= bit_i;
+            data[counter_8] <= bit_i;
         end else data <= data;
     end
 end

@@ -81,3 +81,19 @@ wave_rx:
 clean_rx:
 	rm -rf $(VVP_RX)
 	rm -rf $(VCD_RX)
+
+# Target : Top
+
+top: compile_top
+	$(SIMULATION) $(VVP_TOP)
+
+compile_top:
+	mkdir -p temp
+	$(COMPILER) $(COMPILER_FLAG2) $(COMPILER_FLAG1) $(VVP_TOP) $(TOP_TB) $(TOP_SV) $(BAUD_GEN_SV) $(TX_SV) $(RX_SV)
+
+wave_top:
+	$(WAVE) $(VCD_TOP)
+
+clean_top:
+	rm -rf $(VVP_TOP)
+	rm -rf $(VCD_TOP)

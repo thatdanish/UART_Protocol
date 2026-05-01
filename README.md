@@ -22,3 +22,11 @@ This repository contains RTL implementation of 8-bit UART, written in system-ver
 - Start bit (HIGH) : Tx line kept high in idle state.
 - Stop bit (HIGH) : Additional bit (Boolean 1) is augmented after the data.
 - No parity bits.
+
+<center>
+
+![image](wave.png)
+
+    Fig 1:  Transmitting and receiving two 8-bit values (8'd88 & 8'd17) using 8-bit UART interface.
+    
+</center>
